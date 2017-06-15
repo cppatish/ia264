@@ -170,6 +170,10 @@ void DestroyEncoder()
 }
 
 int rgbToH264(U8 *pdata){
+    if (NULL == convertCtx) {
+        return 0;
+    }
+
     fprintf( stderr, "begin convert\n" );
     int srcstride = width*3;
     sws_scale(convertCtx, &pdata, &srcstride, 0, height, pic_in.img.plane, pic_in.img.i_stride);
