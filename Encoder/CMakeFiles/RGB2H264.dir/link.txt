@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/RGB2H264.dir/rgbToH264.cpp.o  -o RGB2H264  -L/mass/workspace/264codec/local/lib -rdynamic -lx264 -lavcodec -lavdevice -lavutil -lswscale -Wl,-rpath,/mass/workspace/264codec/local/lib 
