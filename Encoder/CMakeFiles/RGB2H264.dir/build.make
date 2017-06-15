@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mass/workspace/264codec/sample
+CMAKE_SOURCE_DIR = /mass/workspace/264codec/sample/Encoder
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mass/workspace/264codec/sample
+CMAKE_BINARY_DIR = /mass/workspace/264codec/sample/Encoder
 
 # Include any dependencies generated for this target.
 include CMakeFiles/RGB2H264.dir/depend.make
@@ -51,17 +51,17 @@ include CMakeFiles/RGB2H264.dir/flags.make
 
 CMakeFiles/RGB2H264.dir/rgbToH264.cpp.o: CMakeFiles/RGB2H264.dir/flags.make
 CMakeFiles/RGB2H264.dir/rgbToH264.cpp.o: rgbToH264.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /mass/workspace/264codec/sample/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /mass/workspace/264codec/sample/Encoder/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/RGB2H264.dir/rgbToH264.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/RGB2H264.dir/rgbToH264.cpp.o -c /mass/workspace/264codec/sample/rgbToH264.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/RGB2H264.dir/rgbToH264.cpp.o -c /mass/workspace/264codec/sample/Encoder/rgbToH264.cpp
 
 CMakeFiles/RGB2H264.dir/rgbToH264.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/RGB2H264.dir/rgbToH264.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /mass/workspace/264codec/sample/rgbToH264.cpp > CMakeFiles/RGB2H264.dir/rgbToH264.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /mass/workspace/264codec/sample/Encoder/rgbToH264.cpp > CMakeFiles/RGB2H264.dir/rgbToH264.cpp.i
 
 CMakeFiles/RGB2H264.dir/rgbToH264.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/RGB2H264.dir/rgbToH264.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /mass/workspace/264codec/sample/rgbToH264.cpp -o CMakeFiles/RGB2H264.dir/rgbToH264.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /mass/workspace/264codec/sample/Encoder/rgbToH264.cpp -o CMakeFiles/RGB2H264.dir/rgbToH264.cpp.s
 
 CMakeFiles/RGB2H264.dir/rgbToH264.cpp.o.requires:
 .PHONY : CMakeFiles/RGB2H264.dir/rgbToH264.cpp.o.requires
@@ -97,6 +97,6 @@ CMakeFiles/RGB2H264.dir/clean:
 .PHONY : CMakeFiles/RGB2H264.dir/clean
 
 CMakeFiles/RGB2H264.dir/depend:
-	cd /mass/workspace/264codec/sample && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mass/workspace/264codec/sample /mass/workspace/264codec/sample /mass/workspace/264codec/sample /mass/workspace/264codec/sample /mass/workspace/264codec/sample/CMakeFiles/RGB2H264.dir/DependInfo.cmake --color=$(COLOR)
+	cd /mass/workspace/264codec/sample/Encoder && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mass/workspace/264codec/sample/Encoder /mass/workspace/264codec/sample/Encoder /mass/workspace/264codec/sample/Encoder /mass/workspace/264codec/sample/Encoder /mass/workspace/264codec/sample/Encoder/CMakeFiles/RGB2H264.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/RGB2H264.dir/depend
 

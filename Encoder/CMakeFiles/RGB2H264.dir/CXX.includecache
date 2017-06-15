@@ -154,7 +154,7 @@ x264_config.h
 
 /mass/workspace/264codec/local/include/x264_config.h
 
-/mass/workspace/264codec/sample/rgbToH264.cpp
+/mass/workspace/264codec/sample/Encoder/rgbToH264.cpp
 string.h
 -
 stdint.h

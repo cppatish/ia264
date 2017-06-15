@@ -4,7 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/mass/workspace/264codec/sample/rgbToH264.cpp" "/mass/workspace/264codec/sample/CMakeFiles/RGB2H264.dir/rgbToH264.cpp.o"
+  "/mass/workspace/264codec/sample/Encoder/rgbToH264.cpp" "/mass/workspace/264codec/sample/Encoder/CMakeFiles/RGB2H264.dir/rgbToH264.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 

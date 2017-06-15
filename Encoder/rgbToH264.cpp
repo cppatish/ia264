@@ -41,6 +41,11 @@ typedef struct tagBITMAPINFOHEADER{
 
 #pragma pack(pop)
 
+struct SwsContext* convertCtx = NULL;
+x264_t* encoder = NULL;
+U32 width, height = 0; 
+x264_picture_t pic_in, pic_out;
+
 U8* GetBmpData(U8 *bitCountPerPix, U32 *width, U32 *height, const char* filename) { 
     FILE *pf = fopen(filename, "rb"); 
     if(!pf) { 
@@ -84,7 +89,7 @@ U8* GetBmpData(U8 *bitCountPerPix, U32 *width, U32 *height, const char* filename
         for(h = (*height) - 1; h >= 0; --h) { // bmp文件每行是倒着放的
             fread(pEachLinBuf, imgLineSize, 1, pf); 
             bufPoniter = pdata + (*width)*h*BytePerPix ;
-            for(w = 0 ; w < (*width); ++w) { 
+            for(w = 0 ; w < (int)(*width); ++w) { 
                 for(j=0; j<BytePerPix; ++j){
                     if((*bitCountPerPix)==32){  // 32位时，原图是一个像素占用4个字节
                         bufPoniter[w*BytePerPix + j ] = pEachLinBuf[w*4 + j ]; 
@@ -107,7 +112,8 @@ void FreeBmpData(U8 *pdata) {
     } 
 }
 
-int rgbToH264(U8 *pdata, U32 width, U32 height){
+void Init_Encoder(U32 width, U32 height)
+{
     x264_param_t param;
     x264_param_default_preset(&param, "veryfast", "zerolatency");
     // 配置参数
@@ -133,13 +139,11 @@ int rgbToH264(U8 *pdata, U32 width, U32 height){
     // 执行配置参数
     x264_param_apply_profile(&param, "baseline");
     // 编码器
-    x264_t* encoder = x264_encoder_open(&param);
-    x264_picture_t pic_in, pic_out;
+    encoder = x264_encoder_open(&param);
     x264_picture_alloc(&pic_in, X264_CSP_I420, width, height);
     pic_in.img.i_csp = X264_CSP_I420;  
     pic_in.img.i_plane = 3;
     // 转换函数
-    struct SwsContext* convertCtx = NULL;
     convertCtx = sws_getContext(width, height, AV_PIX_FMT_BGR24, width, height, AV_PIX_FMT_YUV420P, SWS_FAST_BILINEAR, NULL, NULL, NULL);
     /*
     switch(bitCountPerPix){
@@ -157,11 +161,20 @@ int rgbToH264(U8 *pdata, U32 width, U32 height){
             break;
     }
     */
+}
+
+void DestroyEncoder()
+{
+    x264_encoder_close( encoder );
+    x264_picture_clean( &pic_in );
+}
+
+int rgbToH264(U8 *pdata){
     fprintf( stderr, "begin convert\n" );
     int srcstride = width*3;
     sws_scale(convertCtx, &pdata, &srcstride, 0, height, pic_in.img.plane, pic_in.img.i_stride);
     // h264输出文件
-    FILE* fout=fopen("out.h264","w");
+    FILE* fout=fopen("out.mp4","a+");
     if(fout==NULL){
         fprintf( stderr, "open out.h264 failed\n" );
         return -1;
@@ -175,23 +188,37 @@ int rgbToH264(U8 *pdata, U32 width, U32 height){
         fwrite( nals->p_payload, frame_size, 1, fout );
     }
     
-    x264_encoder_close( encoder );
-    x264_picture_clean( &pic_in );
     fclose(fout);
     return 0;
 }
 
 int main(int argc, char *argv[]) {
-    if( argc != 2){ 
-        fprintf( stderr,"Example usage: example xxxx.bmp\n");
-        return -1; 
-    };
+    // if( argc != 2){ 
+    //     fprintf( stderr,"Example usage: example xxxx.bmp\n");
+    //     return -1; 
+    // };
     U8 bitCountPerPix; 
-    U32 width, height; 
-    U8 *pdata = GetBmpData(&bitCountPerPix, &width, &height, argv[1]); 
-    if(pdata){
-        rgbToH264(pdata, width, height);
-        FreeBmpData(pdata); 
+    const char* file_fat = "../pic/1280x720-%d.bmp";
+    char file_name[20];
+    for (int i = 0; i < 20; ++i) {
+        memset(file_name, 0, sizeof(file_name));
+        sprintf(file_name, file_fat, (i % 9) + 1);
+        U32 _width, _height = 0; 
+        U8 *pdata = GetBmpData(&bitCountPerPix, &_width, &_height, file_name); 
+        if (width != _width || height != _height) {
+            width = _width;
+            height = _height;
+            Init_Encoder(width, height);
+        }
+
+        if(pdata){
+            // rgbToH264(pdata, width, height);
+            rgbToH264(pdata);
+            FreeBmpData(pdata); 
+        }
     }
+
+    DestroyEncoder();
+
     return 0;
 }

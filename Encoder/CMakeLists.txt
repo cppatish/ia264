@@ -1,5 +1,8 @@
 cmake_minimum_required (VERSION 2.6)
 project (RGB2H264)
+SET(CMAKE_BUILD_TYPE "Debug")
+SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb")
+SET(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
 set(INC_DIR /mass/workspace/264codec/local/include)  
 set(LINK_DIR /mass/workspace/264codec/local/lib)  
 set(DIR_SRCS /mass/workspace/264codec/sample/Encoder)

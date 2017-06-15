@@ -19,4 +19,4 @@ CMakeFiles/RGB2H264.dir/rgbToH264.cpp.o
  /mass/workspace/264codec/local/include/libswscale/version.h
  /mass/workspace/264codec/local/include/x264.h
  /mass/workspace/264codec/local/include/x264_config.h
- /mass/workspace/264codec/sample/rgbToH264.cpp
+ /mass/workspace/264codec/sample/Encoder/rgbToH264.cpp
